@@ -4,6 +4,7 @@ import 'package:beats/controllers/player_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:on_audio_query/on_audio_query.dart';
+import 'package:text_scroll/text_scroll.dart';
 
 class PlayerScreen extends StatelessWidget {
   const PlayerScreen({super.key, required this.data});
@@ -22,14 +23,11 @@ class PlayerScreen extends StatelessWidget {
             Obx(
               () => Expanded(
                 child: Container(
-                  height: 30,
-                  width: 300,
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                  ),
                   alignment: Alignment.center,
                   child: QueryArtworkWidget(
+                    artworkHeight: 300,
+                    artworkWidth: 300,
+                    artworkBorder: BorderRadius.circular(10),
                     id: data[controller.playIndex.value].id,
                     type: ArtworkType.AUDIO,
                     nullArtworkWidget: const Icon(Icons.music_note),
@@ -51,16 +49,31 @@ class PlayerScreen extends StatelessWidget {
                 child: Obx(
                   () => Column(
                     children: [
-                      Text(
-                        data[controller.playIndex.value].displayNameWOExt,
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                              color: bgDarkColor,
-                              fontSize: 24,
-                            ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: TextScroll(
+                           data[controller.playIndex.value].displayNameWOExt,
+                           velocity: const Velocity(pixelsPerSecond: Offset(40, 0)),
+                           
+                           pauseBetween: const Duration(seconds:3),
+                           style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                  color: bgDarkColor,
+                                  fontSize: 24,
+                                ), 
+                                            
+                          // child: Text(
+                          //   data[controller.playIndex.value].displayNameWOExt,
+                          //   textAlign: TextAlign.center,
+                          //   overflow: TextOverflow.ellipsis,
+                          //   maxLines: 2,
+                          //   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          //         color: bgDarkColor,
+                          //         fontSize: 24,
+                          //       ),
+                          // ),
+                        ),
                       ),
+                      const SizedBox(height: 10),
                       Text(
                         data[controller.playIndex.value].artist ??
                             'Unknown Artist',
@@ -69,7 +82,7 @@ class PlayerScreen extends StatelessWidget {
                         maxLines: 2,
                         style: Theme.of(context).textTheme.bodySmall!.copyWith(
                               color: bgDarkColor,
-                              fontSize: 20,
+                              fontSize: 16,
                             ),
                       ),
                       const SizedBox(height: 15),
