@@ -52,15 +52,17 @@ class PlayerScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextScroll(
-                           data[controller.playIndex.value].displayNameWOExt,
-                           velocity: const Velocity(pixelsPerSecond: Offset(40, 0)),
-                           
-                           pauseBetween: const Duration(seconds:3),
-                           style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                  color: bgDarkColor,
-                                  fontSize: 24,
-                                ), 
-                                            
+                          data[controller.playIndex.value].displayNameWOExt,
+                          velocity:
+                              const Velocity(pixelsPerSecond: Offset(40, 0)),
+
+                          pauseBetween: const Duration(seconds: 3),
+                          style:
+                              Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                    color: bgDarkColor,
+                                    fontSize: 24,
+                                  ),
+
                           // child: Text(
                           //   data[controller.playIndex.value].displayNameWOExt,
                           //   textAlign: TextAlign.center,
@@ -122,7 +124,7 @@ class PlayerScreen extends StatelessWidget {
                           IconButton(
                               onPressed: () {
                                 controller.playSong(
-                                  data[controller.playIndex.value -1].uri,
+                                  data[controller.playIndex.value - 1].uri,
                                   controller.playIndex.value - 1,
                                 );
                               },
