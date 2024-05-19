@@ -78,6 +78,8 @@ class HomeScreen extends StatelessWidget {
                         ),
                         title: Text(
                           snapshot.data![index].displayNameWOExt,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
                           style:
                               Theme.of(context).textTheme.bodyLarge!.copyWith(
                                     color: whiteColor,
